@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>My Posts - Friendly Neighborhood</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/webApp">Friendly Neighborhood</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            My Account
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/profile">Profile</a>
+                            <a class="dropdown-item" href="/myPosts">My Posts</a>
+                            <a class="dropdown-item" href="/blockList">Block List</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout">Log Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- End Navigation Bar -->
+
+    <div class="container mt-5 pt-4"> <!-- Adjust margin and padding to account for fixed navbar -->
+        <h1 class="mb-4">My Posts</h1>
+        {% if posts %}
+        {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.text }}</p>
+                <p class="text-muted"><small>Last Modified: {{ post.last_modified|default("Not modified yet") }}</small></p>
+                <form action="/viewPostDetail" method="GET" class="inline-form">
+                    <input type="hidden" name="postId" value="{{ post.id }}">
+                    <button type="submit" class="view_post_detail_button">View Details</button>
+                </form>
+                <form action="/deletePost" method="post" class="inline-form">
+                    <input type="hidden" name="postId" value="{{ post.id }}">
+                    <button type="submit" class="view_post_detail_button" onclick="if(confirm('Are you sure?'))">Delete</button>
+                </form>
+                  
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>You have no posts.</p>
+        {% endif %}
+
+        {% if interested_list %}
+        {% for interest in interested_list %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <p>{{ interest }}</p>
+                   
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>You have no posts.</p>
+        {% endif %}
+        <a href="/webApp" class="view_post_detail_button">Back to Home</a>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+body {
+  display: flex;
+  width: 100vw;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/static/bg.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center 50px;
+  background-color: rgba(206, 255, 253, 0.448);
+  padding: 60px;
+}
+
+a {
+  color: initial;
+}
+
+#map {
+  float:left;
+  top: 60%;
+  left: 0;
+}
+
+.view_post_detail_button {
+  width: 178px;
+  margin: 0 auto;
+  display: inline;
+}
+
+.inline-form {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.inline-table {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
+}
+
+.flashes {
+  color: red;
+  font-weight: bold;
+  list-style-type: none;
+}

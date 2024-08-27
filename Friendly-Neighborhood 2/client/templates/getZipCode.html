@@ -1,0 +1,67 @@
+<!-- jdw21a 2/21/2024
+The program in this file is the individual work of John Whiddon -->
+<!DOCTYPE html>
+<head>
+   <meta content="width=device-width, initial-scale=1.0" />
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="/static/style.css" />
+  </head>
+
+<body>
+   <!-- Navigation Bar -->
+   <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/webApp">Friendly Neighborhood</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                My Account
+              </a>
+              <div
+                class="dropdown-menu dropdown-menu-right"
+                aria-labelledby="navbarDropdown"
+              >
+                <a class="dropdown-item" href="/profile">Profile</a>
+                <a class="dropdown-item" href="/myPosts">My Posts</a>
+                <a class="dropdown-item" href="/blockList">Block List</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Log Out</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navigation Bar -->
+   <div>
+      <form action = "{{ url_for('viewPosts') }}" method = "POST">
+         <h1>Friendly-Neighborhood</h1>
+         <h2>View posts by zip code</h2>
+         Zip Code<br>
+         <input type = "text" name = "ZipCode" /></br>
+
+         <input type = "Submit" value = "submit" /><br>
+      </form>
+      <a href='/webApp'>Back to home</a>
+
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
+   </div>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>

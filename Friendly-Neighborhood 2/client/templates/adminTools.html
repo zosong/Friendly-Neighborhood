@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+  <link rel="stylesheet" type="text/css" href="/static/style.css" />
+</head>
+  <body>
+    <div>
+        <form action = "{{ url_for('adminTools') }}" method = "POST">
+           <h1>Friendly-Neighborhood</h1>
+           <h3>Assign moderator to a zip code</h3>
+           Zip Code
+           <input type = "text" name = "ZipCode" /></br>
+           Email
+           <input type = "text" name ="Email" /></br>
+           <input type = "Submit" value = "Submit" /><br>
+        </form>
+
+        <!-- Table of all mods -->
+        <table border="1">
+            <thead>
+              <td>Email</td>
+              <td>Zip</td>
+              <td>Delete</td> 
+            </thead>
+      
+            {% for mod in moderators %}
+            <tr>
+              <td>{{ mod.email }}</td>
+              <td>{{ mod.zip_code }}</td>
+              <td>
+                <form action="{{ url_for('deleteModerator') }}" method="POST">
+                  <input type="hidden" name="mod_id" value="{{ mod.id }}">
+                  <input type="hidden" name="email" value="{{ mod.email }}">
+                  <input type="submit" value="Delete">
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+
+          <!-- Table of banned users -->
+          <h3 style="margin-top: 50px;">List of Banned Users</h3>
+          <form action = "{{ url_for('banUser') }}" method = "POST">
+            <h3>Ban user</h3>
+            Email
+            <input type = "text" name ="Email" /></br>
+            <input type = "Submit" value = "Submit" /><br>
+         </form>
+          <table border="1">
+              <thead>
+                <td>Email</td>
+                <td>Unban</td>
+              </thead>
+        
+              {% for banned_user in banned_users %}
+              <tr>
+                <td>{{ banned_user.email }}</td>
+                <td>
+                  <form action="{{ url_for('unbanUser') }}" method="POST">
+                    <input type="hidden" name="Email" value="{{ banned_user.email }}">
+                    <input type="hidden" name="Banned_Id" value="{{ banned_user.id }}">
+                    <input type="submit" value="Unban">
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+            </table>
+
+        <a href='/webApp'>Back to home</a>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+     </div>
+  </body>
+</html>

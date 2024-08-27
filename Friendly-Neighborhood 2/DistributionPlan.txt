@@ -1,0 +1,17 @@
+To distribute our project efficiently and consistently throughout the environment, we first need a container.
+We considered that a containerization tool should be compatible with Flask and Firebase, as our project "Friendly-Neighborhood" makes use of these platforms.
+It must also be simple to integrate with the cloud services we are going to use.
+Some popular containerizing applications include Docker, Azure Container Apps, Apache Mesos, and Nomad.
+For our application, Docker would be a great option for us. 
+Docker is compatible with most cloud providers and has strong community support.
+With Docker, we would create a Dockerfile to containerize our application and do local testing to make sure it runs as expected in the environment, with the docker run -p localhost:container.
+On our local development machine, we can set environment variables through the command or a configuration file that is not tracked in version control.
+In the Flask application, we can then access these environment variables using Python’s ‘os’ module.
+To deploy our containerized application, there are many popular deployment services that we could use like Azure and AWS.
+For the purpose of this project, these two are very similar, offering computing, databases, networking, developer tools, and security so either one we use would be okay.
+We would need to choose a build pipeline that reads the source code and executes a series of steps to get the application in a runnable state and then have a deployment mechanism that puts the application in the /home/site/wwwroot directory of the web app.
+When the deployment mechanism puts the application in this directory, the instances receive a notification to sync the new files. 
+Our database is already in the cloud, the only way to access it is through the internet.
+Google handles our transactions, they are all atomic and very secure.
+It is ready to be deployed for pay as you go pricing, which for our app we will not be reaching over 100 concurrent users.
+We can stay on the free plan, for the app’s life. 
